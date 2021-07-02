@@ -6,11 +6,27 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
+    
+    var device = UIDevice.modelName
+    var mah = UIDevice.mah
+    var percentage = BatteryControl().getBatteryPercent()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text("Device: \(device)")
+            Text("Total mAh: \(mah)")
+            Text("Percentage: \(percentage)")
+        }
+    }
+}
+
+struct BatteryControl {
+    public func getBatteryPercent() -> Int {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        return Int(UIDevice.current.batteryLevel * 100)
     }
 }
 
