@@ -1,0 +1,12 @@
+This is a list of what you can and can't do
+
+You can:
+ - Use this code to learn new things
+ - Include little parts of code without giving credits
+ - Request changes to the project
+ - Use the code for personal use
+
+You can't:
+ - Reuse this code to publish a version of this app for commercial uses
+ 
+ Thanks for your attention
