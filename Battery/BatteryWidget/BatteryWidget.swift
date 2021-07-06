@@ -10,23 +10,23 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+    func placeholder(in context: Context) -> BatteryEntry {
+        BatteryEntry(date: Date(), configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (BatteryEntry) -> ()) {
+        let entry = BatteryEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [BatteryEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = BatteryEntry(date: entryDate, configuration: configuration)
             entries.append(entry)
         }
 
@@ -35,7 +35,7 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct BatteryEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
 }
@@ -67,7 +67,7 @@ struct BatteryWidget: Widget {
 
 struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
-        BatteryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        BatteryWidgetEntryView(entry: BatteryEntry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
